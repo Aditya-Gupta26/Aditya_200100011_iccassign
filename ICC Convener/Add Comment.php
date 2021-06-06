@@ -2,9 +2,74 @@
 <head>
     <title>Add Comment Page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+table {
+position: relative;
+top: 10px;
+left: 12%;
 
+border-collapse: collapse;
+width: 75%;
+margin: 10px;
+color: #588c7e;
+background-color: rgba(0, 0, 0, 0.5); 
+font-size: 25px;
+text-align: center;
+}
+th {
+background-color: transparent;
+color: white;
+text-align: center;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color : white;}
+ td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: white;
+}
+</style>
     
 </head>
+    <?php
+session_start();
+
+
+$servername = 'localhost';
+$username = 'root';
+$pass = '';
+$db = 'Comment';
+$conn = mysqli_connect($servername,$username,$pass,$db);
+if(!$conn){
+die("Sorry we failed to connect : ". mysqli_connect_error());
+}
+
+?>
+    <body>
+    <table>
+        
+        <?php
+        
+            $show = "SELECT DISTINCT * FROM tables ";
+            $natija = mysqli_query($conn,$show);
+             echo"<tr><th>Name</th><th>Comment</th></tr>";
+            while($row = mysqli_fetch_array($natija)) {
+               
+                echo "<tbody>";
+                echo "<tr>";
+                echo "<td>" . $row['Name'] . "</td>";
+                echo "<td>" . $row['Comments'] . "</td>";
+            
+                echo "</tr>";
+                echo "</tbody>";
+            
+            }
+            echo "</table>";
+       
+        ?>
+    </table>
+</body>    
 <div class = "contact-form">
     <h2>Add Comment</h2>
     <form action ="/ICC Convener/Approve.php" method = "post">
